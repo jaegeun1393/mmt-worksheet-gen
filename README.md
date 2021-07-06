@@ -48,9 +48,9 @@ This is the closing sentence.
   Send the input value to python -> MySQL
   ```
   
-  * Create the seed for the worksheet
+* Create the seed for the worksheet
   ```sh
-  이게 디게 
+  Generate the seed for the worksheet. 
   ```
 
 ### Finished
