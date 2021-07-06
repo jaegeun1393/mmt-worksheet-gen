@@ -73,7 +73,7 @@ Subject.part.section.option.randomvalues
 
 <!-- ROADMAP -->
 ## Template
-![<Example template>](<https://github.com/jaegeun1393/mmt-math-worksheet/blob/main/1.PNG>)
+![<Example template>](<https://github.com/jaegeun1393/mmt-worksheet-gen/blob/main/1.PNG>)
 
 
 <!-- ROADMAP -->
