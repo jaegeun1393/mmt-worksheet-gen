@@ -28,9 +28,9 @@
 About the Project. This is the description of the program.
 
 Here's why:
-* BNGO 평단가 낮추기
-* BNGO 화성 가기
-* 머스크형 화성 보내야지
+* 
+* 
+* 
 
 This is the closing sentence. 
 
