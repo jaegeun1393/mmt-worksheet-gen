@@ -96,6 +96,7 @@ h6 {
     font-size: 16px;
     margin-left: -23px;
     margin-top: -13px;
+    width: 300px;
 }
 
 .dropbts:hover, .dropbts:focus {
