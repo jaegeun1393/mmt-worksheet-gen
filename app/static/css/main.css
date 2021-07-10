@@ -47,10 +47,10 @@ li a:hover:not(.active) {
 /*Right side menu*/
 
 .side-bar {
+    position: fixed;
     background-color: #fff;
     height: calc(100% - 84px);
     overflow-y: auto;
-    position: relative;
     width: 300px;
 }
 

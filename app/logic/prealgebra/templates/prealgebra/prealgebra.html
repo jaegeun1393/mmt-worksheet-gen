@@ -6,7 +6,10 @@
 
 {% block content %}
 <body>
-  <div class="side-bar shadow">
+  <div id="seed" style="display: none;">
+    <p>{{ seed }}</p>
+  </div>
+  <div class="side-bar shadow" style="float: left" method="POST">
     <div class="menu_intro" style="padding: 24px">
       <h3 class="w3-bar-item">Worksheet Options</h3>
       <h6 style="color: rgb(94, 94, 94)">Prealgebra worksheet generater</h6>
@@ -15,20 +18,27 @@
           <div id="myDropdown" class="dropdown-content">
             
             <div class="num_problem">
-              <label for="tentacles" class="num-problem-font">Number of Problems*</label>
-              <input type="number" id="tentacles" name="tentacles" min="10" max="1000">
+              <label for="numprob" class="num-problem-font">Number of Problems*</label>
+              <input type="number" id="numprob" name="numprob" min="1" max="10">
             </div>
 
             <div class="txt-title">
-              <label for="tentacles2" class="num-problem-font">Enter the title* </label>
-              <input type="text" id="tentacles2" name="tentacles2">
+              <label for="studnetName" class="num-problem-font">Student Name* </label>
+              <input type="text" id="studnetName" name="studnetName">
             </div>
 
             <div class="txt-desc">
-              <label for="tentacles3" class="num-problem-font">Enter the desc* </label>
-              <input type="text" id="tentacles3" name="tentacles3">
+              <label for="dueDate" class="num-problem-font">Due Date* </label>
+              <input type="date" id="dueDate" name="dueDate">
             </div>
 
+            <div class="txt-randnum">
+              <label for="randnum" class="num-problem-font">min* </label>
+              <input type="number" id="minnum" name="min" min="100" max="899">
+
+              <label for="randnum" class="num-problem-font">max* </label>
+              <input type="number" id="maxnum" name="max" min="101" max="900">
+            </div>
             <!--
             <div class="switch-box">
               <label class="switch">
@@ -67,26 +77,60 @@
 
       <div class="dropdown">
         <button onclick="resetLocation()" class="dropbts" id="second-opt">Display Options</button>
+        <div id="myDropdown2" class="dropdown-content2">
+            
+          <div class="num_problem">
+            <label for="numprob" class="num-problem-font">Number of Problems*</label>
+            <input type="number" id="numprob" name="numprob" min="1" max="10">
+          </div>
+
+          <div class="txt-title">
+            <label for="studnetName" class="num-problem-font">Student Name* </label>
+            <input type="text" id="studnetName" name="studnetName">
+          </div>
+
+          <div class="txt-desc">
+            <label for="dueDate" class="num-problem-font">Due Date* </label>
+            <input type="date" id="dueDate" name="dueDate">
+          </div>
+
+          <div class="txt-randnum">
+            <label for="randnum" class="num-problem-font">min* </label>
+            <input type="number" id="minnum" name="min" min="100" max="899">
+
+            <label for="randnum" class="num-problem-font">max* </label>
+            <input type="number" id="maxnum" name="max" min="101" max="900">
+          </div>
+        </div>
       </div>
 
     </div>
-  </div>
-
   <!--Generate button box-->
   <div class="btn_generate shadow">
-    <button class="btn-create shadow" onclick="send_info()">GENERATE WORKSHEET</button>
+    <button method="POST" class="btn-create shadow" onclick="send_section1()">GENERATE WORKSHEET</button>
   </div>
 
+  <!--End of the vertical option bar-->
+</div>
   <!-- Exmaples
     <p><span>$$\overline{4}6,440 $$</span></p>
   -->
 
-  <div class = "col-worksheet">
-    <div>
-      <p class= "wks-name">Name: </p>
+  <div class="wks-gen" style="width: 75%; float: right">
+    <div class = "col-worksheet">
+      
+      <div class="wks-info">
+        <div> <p class= "wks-name">Name: <span id="txt-studnetName"></span></p> </div>
+        <div> <p class= "wks-date">Due Date: <span id="txt-dueDate"></span></p> </div>
+      </div>
+
+      <div id="wks-problems">
+        $$\overline{4}6,440 $$
+
+      </div>
+
     </div>
   </div>
-
 </body>
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">

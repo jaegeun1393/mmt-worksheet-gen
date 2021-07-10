@@ -12,8 +12,9 @@ function myFunction() {
 }
 
 function resetLocation() {
-	document.getElementById("second-opt").style.top = "0px";
-	var dropdowns = document.getElementsByClassName("dropdown-content");
+	document.getElementById("myDropdown2").classList.toggle("show"); //display options
+	document.getElementById("second-opt").style.top = "0px"; //reset location
+	var dropdowns = document.getElementsByClassName("dropdown-content2");
 	var i;
 	for (i = 0; i < dropdowns.length; i++) {
 		var openDropdown = dropdowns[i];
@@ -21,11 +22,6 @@ function resetLocation() {
 			openDropdown.classList.remove('show');
 		}
 	}
-}
-
-function send_info() {
-	var num = document.getElementById("tentacles").value;
-	console.log("=Number of problems: ", num);
 }
 
 function btnadd() {
@@ -47,15 +43,6 @@ function loginUser() {
 This animation won't work in any version of IE.
 
 */
-
-angular.module('myApp', [])
-            .controller('myCtrl', ['$scope', function($scope) {
-                $scope.message = "Howdy!!";
-            }])
-            .config(['$interpolateProvider', function($interpolateProvider) {
-                    $interpolateProvider.startSymbol('{a');
-                    $interpolateProvider.endSymbol('a}');
-            }]);
   
 
 // Close the dropdown if the user clicks outside of it

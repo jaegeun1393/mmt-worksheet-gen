@@ -58,10 +58,6 @@ def search():
 
         return 'success'
 
- 
-
-    return 'success'
-
 #    return render_template(
 #        'login/signup.html',
 #        nav=nav,

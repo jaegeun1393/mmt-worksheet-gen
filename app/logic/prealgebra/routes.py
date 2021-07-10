@@ -17,13 +17,21 @@ nav = [
 
 @prealgebra_bp.route('/')
 def prealgebra_main():
-    #passing dict to contruct 
-    print("passP")
     return render_template(
         'prealgebra/prealgebra.html', 
         nav=nav , 
         descripstion = 'prealgebra/01'
         )
+
+@prealgebra_bp.route('/1-1-1', methods=["GET", "POST"])
+def prealgebra_sec1():
+    
+    return render_template(
+        'prealgebra/prealgebra.html', 
+        seed = '1-1-1',
+        nav=nav , 
+        descripstion = 'prealgebra/01'
+    )
 
 @prealgebra_bp.route('/01_decimal_place')
 def decimal_place():
