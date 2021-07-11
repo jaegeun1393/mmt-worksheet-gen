@@ -1,12 +1,16 @@
 .col-worksheet {
   display: none;
   background-color: white;
-  width: 511px;
-  height: 660px;
+  width: 7in;
+  height: 9.25in;
   position: relative;
 /*  left: 750px; */
   top: 20px;
   margin-bottom: 80px; 
+}
+
+.wks-info {
+  height: 50px;
 }
 
 .wks-name {
@@ -31,4 +35,19 @@
 
 #minnum, #maxnum {
   width: 80px;
+}
+
+.wks-title {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 25px;
+}
+
+.wks-desc {
+  margin-top: 0px;
+  text-align: center;
+  font-weight: 100;
+  font-size: 15px;
 }
