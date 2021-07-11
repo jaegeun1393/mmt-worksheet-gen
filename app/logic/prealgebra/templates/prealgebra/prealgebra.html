@@ -2,6 +2,12 @@
 
 {% block head %}
 <title>{{ title }}</title>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="path-to-mathjax/MathJax.js?config=TeX-AMS_CHTML"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,102 +19,67 @@
     <div class="menu_intro" style="padding: 24px">
       <h3 class="w3-bar-item">Worksheet Options</h3>
       <h6 style="color: rgb(94, 94, 94)">Prealgebra worksheet generater</h6>
-      <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Problem Type Options</button>
+      <form onsubmit="return false" novalidate><div class="dropdown">
+        <button onclick="btnop1()" class="dropbtn">Problem Type Options</button>
           <div id="myDropdown" class="dropdown-content">
+            
+        </div>
+      </div> <!--Main close of the first drop down-->
+
+      <div class="dropdown">
+        <button onclick="btnopt2()" class="dropbtn sec-opt" id="second-opt">Display Options</button>
+          <div id="myDropdown2" class="dropdown-content2" style="width: 230; left: 30">
             
             <div class="num_problem">
               <label for="numprob" class="num-problem-font">Number of Problems*</label>
-              <input type="number" id="numprob" name="numprob" min="1" max="10">
+              <input type="number" id="numprob" name="numprob" min="1" max="10" value="1" required>
             </div>
 
-            <div class="txt-title">
+            <div class="txt-randnum">
+              <div style="float: left">
+                <label for="randnum" class="num-problem-font">min* </label>
+                <input type="number" id="minnum" name="min" min="100" max="899" value="100" required>
+              </div>
+
+              <div style="float: right">
+                <label for="randnum" class="num-problem-font">max* </label>
+                <input type="number" id="maxnum" name="max" min="101" max="900" value="101" required>
+              </div>
+            </div>
+
+            <div class="txt-page">
+              <label for="pdfdesc" class="num-problem-font">problems each page* </label>
+              <input type="number" id="numprob" name="numprob" min="1" max="20" value="1" required>
+            </div>
+
+            <div class="txt-name">
               <label for="studnetName" class="num-problem-font">Student Name* </label>
               <input type="text" id="studnetName" name="studnetName">
             </div>
 
-            <div class="txt-desc">
+            <div class="txt-date">
               <label for="dueDate" class="num-problem-font">Due Date* </label>
               <input type="date" id="dueDate" name="dueDate">
             </div>
 
-            <div class="txt-randnum">
-              <label for="randnum" class="num-problem-font">min* </label>
-              <input type="number" id="minnum" name="min" min="100" max="899">
-
-              <label for="randnum" class="num-problem-font">max* </label>
-              <input type="number" id="maxnum" name="max" min="101" max="900">
-            </div>
-            <!--
-            <div class="switch-box">
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round" onclick="btnadd()"></span>
-              </label>
-              <span>Addition</span>
+            <div class="txt-title">
+              <label for="pdftitle" class="num-problem-font">Enter the title* </label>
+              <input type="text" id="pdftitle" name="pdftitle" value="Naming Decimal Places">
             </div>
 
-            <div class="switch-box">
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-              <span>Subtraction</span>
+            <div class="txt-desc">
+              <label for="pdfdesc" class="num-problem-font">Instructions* </label>
+              <input type="text" id="pdfdesc" name="pdfdesc" value="Write the name of each decimal place indicated.">
             </div>
 
-            <div class="switch-box">
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-              <span>Multiplication</span>
-            </div>
-          
-            <div class="switch-box">
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-              <span>Division</span>
-            </div> --> 
           </div>
-
-      </div>
-
-      <div class="dropdown">
-        <button onclick="resetLocation()" class="dropbts" id="second-opt">Display Options</button>
-        <div id="myDropdown2" class="dropdown-content2">
-            
-          <div class="num_problem">
-            <label for="numprob" class="num-problem-font">Number of Problems*</label>
-            <input type="number" id="numprob" name="numprob" min="1" max="10">
-          </div>
-
-          <div class="txt-title">
-            <label for="studnetName" class="num-problem-font">Student Name* </label>
-            <input type="text" id="studnetName" name="studnetName">
-          </div>
-
-          <div class="txt-desc">
-            <label for="dueDate" class="num-problem-font">Due Date* </label>
-            <input type="date" id="dueDate" name="dueDate">
-          </div>
-
-          <div class="txt-randnum">
-            <label for="randnum" class="num-problem-font">min* </label>
-            <input type="number" id="minnum" name="min" min="100" max="899">
-
-            <label for="randnum" class="num-problem-font">max* </label>
-            <input type="number" id="maxnum" name="max" min="101" max="900">
-          </div>
-        </div>
       </div>
 
     </div>
   <!--Generate button box-->
   <div class="btn_generate shadow">
-    <button method="POST" class="btn-create shadow" onclick="send_section1()">GENERATE WORKSHEET</button>
-  </div>
+    <button type="submit" class="btn-create shadow" onclick="send_section111()">GENERATE WORKSHEET</button>
+  </div></form> 
 
   <!--End of the vertical option bar-->
 </div>
@@ -124,24 +95,15 @@
         <div> <p class= "wks-date">Due Date: <span id="txt-dueDate"></span></p> </div>
       </div>
 
-      <div id="wks-problems">
-        $$\overline{4}6,440 $$
+      <div class="wks-info2">
+        <div> <p class= "wks-title"><span id="txt-title"></span></p> </div>
+        <div> <p class= "wks-desc"><span id="txt-desc"></span></p> </div>
+      </div>
 
+      <div id="wks-problems">
       </div>
 
     </div>
   </div>
 </body>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
-  MathJax.Hub.Config({
-  extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-  },
-  "HTML-CSS": { availableFonts: ["TeX"] }
-});
-</script> 
 {% endblock %}

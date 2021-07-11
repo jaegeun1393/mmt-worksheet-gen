@@ -25,7 +25,6 @@ def prealgebra_main():
 
 @prealgebra_bp.route('/1-1-1', methods=["GET", "POST"])
 def prealgebra_sec1():
-    
     return render_template(
         'prealgebra/prealgebra.html', 
         seed = '1-1-1',
