@@ -1,4 +1,4 @@
-function myFunction() {
+function btnop1() {
 	document.getElementById("myDropdown").classList.toggle("show");
 	//change the location of the button "moveable"
 
@@ -9,12 +9,23 @@ function myFunction() {
 	} else {
 	document.getElementById("second-opt").style.top = "300px";
 	}
+
+
+	var dropdowns = document.getElementsByClassName("dropdown-content2");
+	var i;
+	for (i = 0; i < dropdowns.length; i++) {
+		var openDropdown = dropdowns[i];
+		if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		}
+	}
 }
 
-function resetLocation() {
+function btnopt2() {
 	document.getElementById("myDropdown2").classList.toggle("show"); //display options
 	document.getElementById("second-opt").style.top = "0px"; //reset location
-	var dropdowns = document.getElementsByClassName("dropdown-content2");
+	
+	var dropdowns = document.getElementsByClassName("dropdown-content");
 	var i;
 	for (i = 0; i < dropdowns.length; i++) {
 		var openDropdown = dropdowns[i];
