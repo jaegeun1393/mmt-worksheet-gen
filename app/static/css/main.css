@@ -48,13 +48,13 @@ li a:hover:not(.active) {
 
 .side-bar {
     position: fixed;
-    /*z-index: 1;*/
     left: 0;
     background-color: #fff;
     width: 300px;
     height: calc(100% - 84px);
     overflow-x: hidden;
     overflow-y: auto;
+    padding-bottom: 50px;
 }
 
 h3 {
@@ -73,12 +73,12 @@ h6 {
 /*Drop down menu*/
 .dropbtn {
     background-color: #ffffff;
-    white-space: nowrap;
     color: black;
     border:1px solid rgb(158, 158, 158);
     border-right: none;
     border-left: none;
-    padding: 15px 70px;
+
+    padding: 16px 8px 6px 16px;
     font-size: 16px;
     margin-left: -23px;
     width: 300px;
@@ -96,14 +96,14 @@ h6 {
     position: relative;
     display: inline-block;
 }
-  
+
+/*For section*/
 .dropdown-content {
     display: none;
-    position: absolute;
-    min-width: 300px;
+    width: 230;
+    left: 30px;
     overflow: auto;
     z-index: 1;
-    margin-left: -22px;
 }
 
 .dropdown-content a {
@@ -114,27 +114,6 @@ h6 {
 }
   
 .dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/*For section*/
-.dropdown-content2 {
-    display: none;
-    position: absolute;
-    min-width: 210px;
-    overflow: auto;
-    z-index: 1;
-    top: 40px;
-}
-
-.dropdown-content2 a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-  
-.dropdown-content2 a:hover {
     background-color: #ddd;
 }
 
@@ -174,7 +153,7 @@ h6 {
 /*switch*/
 .switch-box {
     margin-top: 15px;
-    width: 300px;
+    width: 230px;
 }
 
 .switch {
