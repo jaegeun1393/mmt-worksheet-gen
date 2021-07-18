@@ -38,19 +38,14 @@ This is the closing sentence.
 <!-- GETTING STARTED -->
 ## Todo List
 
-* Worksheet generating
+* Worksheet generating -> Latex to html
   ```sh
   Show the worksheet example on the website.
   ```
 
-* Send input values to python
+* Send input values to python -> send js value to py by ajax
   ```sh
   Send the input value to python -> MySQL
-  ```
-  
-* Create the seed for the worksheet
-  ```sh
-  Generate the seed for the worksheet. 
   ```
 
 ### Finished
@@ -63,6 +58,7 @@ Anything I finished
 
 * [BACK] Register
 * [BACK] Call user info to python
+* [BACK] Create the seed for the worksheet
 
 ### Seed rule
 
