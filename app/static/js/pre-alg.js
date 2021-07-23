@@ -41,7 +41,7 @@ function seedDefine() {
 		if(prob > 0) {
 			if(!checkform(min, max)) {
 				return false;
-			} 
+			}
 		}
 	}
 
@@ -56,12 +56,11 @@ function seedDefine() {
 function send_section111(preseed) { //when request wkst form
 	var masterSeed = "";
 	var createSeed = seedDefine();
-	
+
 	if(createSeed == false) {
 		alert("Please check the option before create the worksheet.");
 	} else {
 		preseed = document.getElementById("seed").innerHTML;
-		//masterSeed = preseed + "&&";
 		for(var j = 0; j < 9; j += 3) {
 			for(var i = 0; i < createSeed[j]; i += 1) {
 				masterSeed = masterSeed.concat( section1(createSeed[j+1], createSeed[j+2]) );
@@ -71,6 +70,10 @@ function send_section111(preseed) { //when request wkst form
 		//remove previous p
 		document.getElementById("wks-problems").textContent = "";
 		showPDF(masterSeed);
+
+		//FINAL stage
+		masterSeed = preseed + "&&" + masterSeed;
+		document.getElementById("master").value = createSeed;
 	}
 }
 
@@ -80,7 +83,13 @@ function showPDF(seed) {
 
 	for (var i = 0; i < element.length; i++) {
 		element[i].style.display = "block";
-	} 
+	}
+
+	var element2 = document.getElementsByClassName("upload");
+
+	for (var i = 0; i < element2.length; i++) {
+		element2[i].style.display = "block";
+	}
 
 	var name = document.getElementById("studnetName").value;
 	document.getElementById("txt-studnetName").innerHTML = name;
@@ -91,19 +100,23 @@ function showPDF(seed) {
 	document.getElementById("txt-title").innerHTML = document.getElementById("pdftitle").value;
 	document.getElementById("txt-desc").innerHTML = document.getElementById("pdfdesc").value;
 
-	var divs = document.createElement("p");
+	var divs = document.createElement('div');
 	divs.innerHTML = seed;
-	console.log(divs);
-	document.getElementById("wks-problems").appendChild(divs);
+	const typeset = document.querySelector('#wks-problems')
+	typeset.appendChild(divs)
+	setTimeout(function () {
+		MathJax.typeset()
+		typeset.appendChild(divs)
+	  }, 10)
 }
 
 //Generate random problems
 function sec1rand(min, max) {return Math.floor((Math.random() * (max - min + 1)) + min);}
-function section1(min, max) { //difficulty, minimum, maximum 
-	var digit = sec1rand(1, 3), //define the value 
-	num = sec1rand(min, max), 
+function section1(min, max) { //difficulty, minimum, maximum
+	var digit = sec1rand(1, 3), //define the value
+	num = sec1rand(min, max),
 	s_num = num.toString(),
-	prob = "\\overline{b}", 
+	prob = "\\overline{b}",
 	arr = [],
 	problem = "";
 
@@ -114,12 +127,12 @@ function section1(min, max) { //difficulty, minimum, maximum
 	}
 
 	//replace & combine
-	if(digit == 1) { 
-		problem = "[" + prob.replace("b", arr[0]) + arr[1] + arr[2] + "]"; }
-	else if(digit == 2) { 
-		problem = "[" + arr[0] + prob.replace("b", arr[1]) + arr[2] + "]"; } 
-	else { 
-		problem = "[" + arr[0] + arr[1] + prob.replace("b", arr[2]) + "]"; }
-	
+	if(digit == 1) {
+		problem = "\\(" + prob.replace("b", arr[0]) + arr[1] + arr[2] + "\\)"; }
+	else if(digit == 2) {
+		problem = "\\(" + arr[0] + prob.replace("b", arr[1]) + arr[2] + "\\)"; }
+	else {
+		problem = "\\(" + arr[0] + arr[1] + prob.replace("b", arr[2]) + "\\)"; }
+
 	return problem
 }

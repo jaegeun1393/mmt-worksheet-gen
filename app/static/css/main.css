@@ -241,3 +241,15 @@ input {
 .txt-randnum {
     height: 50px;
 }
+
+.upload {
+    display: none;
+    position: fixed;
+    background-color: yellow;
+    border: none;
+    padding: 20px;
+    border-radius: 50%;
+    top: 89%;
+    left: 93%; 
+    cursor: pointer;
+}

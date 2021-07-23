@@ -6,16 +6,20 @@
 
 {% block content %}
 <body>
+  <form novalidate style="height: 0px" method = "POST">
+
+  <!--MASTER LOCATION TO SAVE DATA-->
   <div style="display: none;">
     <p id="seed">{{ seed }}</p>
+    <input type="text" id="master" name="master">
   </div>
-  <form onsubmit="return false" novalidate style="height: 0px">
+
   <div class="side-bar shadow" style="float: left">
     <div class="menu_intro" style="padding: 24px">
       <h3 class="w3-bar-item">Worksheet Options</h3>
       <h6 style="color: rgb(94, 94, 94)">Prealgebra worksheet generater</h6>
       <div class="dropdown">
-        <button onclick="btnop1()" class="dropbtn">Problem Type Options</button>
+        <button type="button" onclick="btnop1()" class="dropbtn">Problem Type Options</button>
         <div id="myDropdown" class="dropdown-content" style="margin-top: 0px">
 
             <div class="switch-box">
@@ -25,18 +29,18 @@
               <div class="opts">
                 <div class="num_problem">
                   <label for="numprob" class="num-problem-font">Number of Problems*</label>
-                  <input type="number" id="Enumprob" name="numprob" min="1" max="100" value="1" required>
+                  <input type="number" id="Enumprob" name="numprob" min="1" max="100" value="40" required/>
                 </div>
-  
+
                 <div class="txt-randnum">
                   <div style="float: left">
                     <label for="randnum" class="num-problem-font">min* </label>
-                    <input type="number" id="Eminnum" name="min" min="100" max="899" value="100" required>
+                    <input type="number" id="Eminnum" name="min" min="100" max="899" value="100" required/>
                   </div>
-  
+
                   <div style="float: right">
                     <label for="randnum" class="num-problem-font">max* </label>
-                    <input type="number" id="Emaxnum" name="max" min="101" max="900" value="110" required>
+                    <input type="number" id="Emaxnum" name="max" min="101" max="900" value="200" required/>
                   </div>
                 </div>
              </div>
@@ -48,41 +52,41 @@
               <div class="opts">
                 <div class="num_problem">
                   <label for="numprob" class="num-problem-font">Number of Problems*</label>
-                  <input type="number" id="Mnumprob" name="numprob" min="1" max="100" value="3" required>
+                  <input type="number" id="Mnumprob" name="numprob" min="1" max="100" value="50" required/>
                 </div>
-  
+
                 <div class="txt-randnum">
                   <div style="float: left">
                     <label for="randnum" class="num-problem-font">min* </label>
-                    <input type="number" id="Mminnum" name="min" min="100" max="899" value="200" required>
+                    <input type="number" id="Mminnum" name="min" min="100" max="899" value="300" required/>
                   </div>
-  
+
                   <div style="float: right">
                     <label for="randnum" class="num-problem-font">max* </label>
-                    <input type="number" id="Mmaxnum" name="max" min="101" max="900" value="210" required>
+                    <input type="number" id="Mmaxnum" name="max" min="101" max="900" value="400" required/>
                   </div>
                 </div>
              </div>
             </div>
 
             <div class="switch-box">
-  
+
               <span>Decimal</span>
               <div class="opts">
                 <div class="num_problem">
                   <label for="numprob" class="num-problem-font">Number of Problems*</label>
-                  <input type="number" id="Hnumprob" name="numprob" min="1" max="100" value="10" required>
+                  <input type="number" id="Hnumprob" name="numprob" min="1" max="100" value="30" required/>
                 </div>
-  
+
                 <div class="txt-randnum">
                   <div style="float: left">
                     <label for="randnum" class="num-problem-font">min* </label>
-                    <input type="number" id="Hminnum" name="min" min="100" max="899" value="300" required>
+                    <input type="number" id="Hminnum" name="min" min="100" max="899" value="300" required/>
                   </div>
-  
+
                   <div style="float: right">
                     <label for="randnum" class="num-problem-font">max* </label>
-                    <input type="number" id="Hmaxnum" name="max" min="101" max="900" value="310" required>
+                    <input type="number" id="Hmaxnum" name="max" min="101" max="900" value="300" required/>
                   </div>
                 </div>
              </div>
@@ -92,12 +96,12 @@
       </div> <!--Main close of the first drop down-->
 
       <div class="dropdown">
-        <button onclick="btnopt2()" class="dropbtn sec-opt" id="second-opt">Display Options</button>
+        <button type="button" onclick="btnopt2()" class="dropbtn sec-opt" id="second-opt">Display Options</button>
           <div id="myDropdown2" class="dropdown-content" style="margin-top: 50px">
 
             <div class="txt-page">
               <label for="pdfdesc" class="num-problem-font">problems each page* </label>
-              <input type="number" id="numprob" name="numprob" min="1" max="20" value="1" required>
+              <input type="number" id="numprob" name="numprob" min="1" max="20" required/>
             </div>
 
             <div class="txt-name">
@@ -121,7 +125,7 @@
             <div class="txt-desc">
               <label for="pdfdesc" class="num-problem-font">Instructions* </label>
               <input type="text" id="pdfdesc" name="pdfdesc" value="Write the name of each decimal place indicated.">
-              <button type="button" class="btn" style="float: right">Update</button>
+              <button method="POST" type="button" class="btn" style="float: right">Update</button>
             </div>
 
           </div>
@@ -129,19 +133,22 @@
 
     </div>
   <!--Generate button box-->
+  <button type="submit" formmethod="post" class="upload"> <i class="fa fa-upload fa-2x"></i></button>
   <div class="btn_generate shadow">
-    <button type="submit" class="btn-create shadow" onclick="send_section111(seed)">GENERATE WORKSHEET</button>
-  </div></form> 
-
+  <!--  <input type="submit" class="btn-create shadow" value="GENERATE WORKSHEET  "/> -->
+    <button type="button" class="btn-create shadow" onclick="send_section111(seed)">GENERATE WORKSHEET</button>
+  </div>
+</form>
   <!--End of the vertical option bar-->
 </div>
   <!-- Exmaples
     <p><span>$$\overline{4}6,440 $$</span></p>
   -->
 
+
   <div class="wks-gen" style="width: 75%; float: right">
     <div class = "col-worksheet">
-      
+
       <div class="wks-info">
         <div> <p class= "wks-name">Name: <span id="txt-studnetName"></span></p> </div>
         <div> <p class= "wks-date">Due Date: <span id="txt-dueDate"></span></p> </div>
@@ -157,24 +164,12 @@
 
     </div>
   </div>
-  
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js" async>
-  MathJax.Hub.Config({
-  extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-  },
-  "HTML-CSS": { availableFonts: ["TeX"] }
-  });
-</script> 
 
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("dropbtn");
   var i;
-  
+
   for (i = 0; i < dropdown.length; i++) {
     dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");
@@ -192,7 +187,7 @@
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
   var dropdown = document.getElementsByClassName("easyopt");
   var i;
-  
+
   for (i = 0; i < dropdown.length; i++) {
     dropdown[i].addEventListener("click", function() {
     this.classList.toggle("active");

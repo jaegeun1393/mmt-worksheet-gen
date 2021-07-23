@@ -26,7 +26,7 @@ def create_app():
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = 'hunter2'
     app.config['MYSQL_PORT'] = 3307
-    app.config['MYSQL_DB'] = 'users'
+    app.config['MYSQL_DB'] = 'mmtwkst'
     mysql = MySQL(app)
     #assets = Environment()  # Create an assets environment
     #assets.init_app(app)  # Initialize Flask-Assets
