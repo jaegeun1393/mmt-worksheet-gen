@@ -11,6 +11,7 @@ nav = [
     {'name': 'Home', 'url': '/'},
     {'name': 'Prealgebra', 'url': '/prealgebra'},
     {'name': 'Algebra', 'url': '/algebra'},
+    {'name': 'Load', 'url': '/loadwkst'},
     {'name': 'Contact', 'url': '/contact'}
     #{'name': 'Signup', 'url': '/signup'}
 ]

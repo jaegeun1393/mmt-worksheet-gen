@@ -40,12 +40,14 @@ def create_app():
     from app.logic.prealgebra.routes import prealgebra_bp
     from app.logic.algebra.routes import algebra_bp
     from app.logic.login.routes import login_bp
+    from app.logic.load.routes import load_dp
     from app.routes import home_bp
     
     app.register_blueprint(home_bp)
     app.register_blueprint(prealgebra_bp)
     app.register_blueprint(algebra_bp)
     app.register_blueprint(login_bp)
+    app.register_blueprint(load_dp)
 
     '''
     for path in bps:
