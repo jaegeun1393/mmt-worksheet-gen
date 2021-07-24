@@ -47,6 +47,16 @@ This is the closing sentence.
   ```sh
   Send the input value to python -> MySQL
   ```
+  
+* Html -> python -> PDF
+  ```sh
+  Trans information into PDF form
+  ```
+ 
+* Set up the UUID for new users
+  ```sh
+  for both teacher and student
+  ```
 
 ### Finished
 
