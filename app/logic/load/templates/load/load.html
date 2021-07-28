@@ -14,8 +14,9 @@
 
   <!--MASTER LOCATION TO SAVE DATA-->
   <div style="display: none;">
-    <p id="seed">{{ seed }}</p>
-    <input type="text" id="master" name="master">
+    <p id="dtitle">{{ darr[0] }}</p>
+    <p id="sname">{{ darr[1] }}</p>
+    <p id="dseed">{{ darr[3] }}</p>
   </div>
 
   <div class="side-bar shadow" style="float: left">
@@ -49,17 +50,13 @@
 
     </div>
   <!--Generate button box-->
-  <div class="btn_generate shadow">
-  <!--  <input type="submit" class="btn-create shadow" value="GENERATE WORKSHEET  "/> -->
-    <button type="button" class="btn-create shadow" onclick="send_section111(seed)">LOAD WORKSHEET</button>
+      <div class="btn_generate shadow">
+        <button type="button" class="btn-create shadow" onclick="createpdf()">LOAD WORKSHEET</button>
+      </div>
+      </div>
+    </div>
   </div>
 </form>
-  <!--End of the vertical option bar-->
-</div>
-  <!-- Exmaples
-    <p><span>$$\overline{4}6,440 $$</span></p>
-  -->
-
 
   <div class="wks-gen" style="width: 75%; float: right">
     <div class = "col-worksheet">
@@ -70,6 +67,9 @@
       </div>
 
       <div class="wks-info2">
+        <div id="content">
+          When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+        </div>
         <div> <p class= "wks-title"><span id="txt-title"></span></p> </div>
         <div> <p class= "wks-desc"><span id="txt-desc"></span></p> </div>
       </div>

@@ -42,12 +42,9 @@ def Decimal_Places(seed):
       temp_problem = list(str(after_comma[0]))
       temp_problem.insert((after_comma[1] * -1),  "\overline{")
       temp_problem = ''.join(temp_problem)
-      temp_problem = "\(" + temp_problem + " \), [" + str(after_comma[1]) + "] "
+      temp_problem = "\(" + temp_problem + " \), " + str(after_comma[1])
       masterSeed.append(temp_problem)
     j = j + 3
     i = i + 3 
   
   return(masterSeed)
-
-seed = "2,100,200,2,1000,2000,2,3000,4000"
-print( Decimal_Places(seed) )

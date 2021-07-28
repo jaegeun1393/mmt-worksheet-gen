@@ -34,14 +34,16 @@ def prealgebra_sec1():
             descripstion = 'prealgebra/01'
         )
     else:
-        name = request.form['studnetName']
+        sname = request.form['studnetName']
+        tname = "aiden O."
         seed = request.form['master']
+        title = request.form['pdftitle']
+        desc = request.form['pdfdesc']
         master = str(Decimal_Places(seed))
-        print(master)
     
     #custom function
         cur = db.connection.cursor()
-        cur.execute("INSERT INTO mmtseeds(seed, student) VALUES(%s, %s)", (master, name))
+        cur.execute("INSERT INTO mmtseed VALUES(%s, %s, %s, %s, %s)", (title, desc, sname, tname, master))
         db.connection.commit()
         cur.close()
         return render_template(
