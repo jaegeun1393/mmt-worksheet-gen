@@ -17,8 +17,14 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/pre-alg.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script type="module">
+      import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs"
+      customElements.define("latex-js", LaTeXJSComponent)
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> 
     <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+    <!--
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({ 
       extensions: ["tex2jax.js"], 
@@ -28,10 +34,11 @@
       processEscapes: true }, 
       "HTML-CSS": { availableFonts: ["TeX"] } 
       });
-    </script>
+    </script> -->
     
+    <!--
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
+    </script>-->
   </head>
 
   <body>
