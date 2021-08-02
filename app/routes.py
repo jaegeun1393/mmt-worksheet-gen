@@ -1,7 +1,8 @@
 """Route declaration."""
 #system imports
-from flask import Blueprint, render_template , request , make_response  
+from flask import *
 from .forms import ContactForm, SignupForm
+from datetime import timedelta
 
 # Blueprint Configuration
 home_bp = Blueprint(
@@ -20,13 +21,28 @@ nav = [
     #{'name': 'Signup', 'url': '/signup'}
 ]
 
+@home_bp.before_request
+def makesession_permanent():
+    session.permanent = True
+    home_bp.permanent_session_lifetime = timedelta(minutes = 60)
+
 @home_bp.route('/')
 def index():
+    login = False
+    if 'response' in session:
+        login = True
+
     return render_template(
         'index.html',
+        data = login,
         title='Math Worksheet Generator',
         subtitle='Sean & Eric collaborates'
     )
+
+@home_bp.route('/logout')
+def logout():
+    session.pop('response', None)
+    return redirect(url_for('home.index'))
 
 @home_bp.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -39,6 +55,15 @@ def contact():
         form=form,
         template="form-template"
     )
+
+#ERROR HANDLE
+@home_bp.errorhandler(404)
+def not_found():
+    """Page not found."""
+    return make_response(
+        render_template("404.html"),
+        404
+     )
 
 '''
 #check sign up forms

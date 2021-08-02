@@ -17,14 +17,21 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/pre-alg.js') }}"></script>
 
+<!-- Js PDF -->
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+
+    <!--
     <script type="module">
       import { LaTeXJSComponent } from "https://cdn.jsdelivr.net/npm/latex.js/dist/latex.mjs"
       customElements.define("latex-js", LaTeXJSComponent)
     </script>
+    -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> 
-    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
-    <!--
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!--
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({ 
       extensions: ["tex2jax.js"], 
@@ -34,7 +41,8 @@
       processEscapes: true }, 
       "HTML-CSS": { availableFonts: ["TeX"] } 
       });
-    </script> -->
+    </script> 
+  -->
     
     <!--
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -99,8 +107,16 @@
 
       <li><a id="navcontact" href="/load">Load</a></li>
       <li><a id="navcontact" href="/contact">Contact</a></li>
+      <!--
+      <li style="float:right"><a class="active" href="../login" id="session">Login</a></li>
+      -->
 
+      {% if data %}
+      <li style="float:right"><a class="active" href="../logout">Logout</a></li>
+      {%else%}
       <li style="float:right"><a class="active" href="../login">Login</a></li>
+      {%endif %}
+
     </ul>
 
     <!--

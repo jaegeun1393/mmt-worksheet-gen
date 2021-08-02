@@ -1,6 +1,5 @@
 import math
 import random
-
 #whole numbers only 199 or 11,717,555
 
 def Commanizer(problemsets):

@@ -20,6 +20,14 @@ function loginUser() {
 	console.log("=Email", emnail);
 	console.log("=password", password);
 }
+
+function showkst() {
+	var element = document.getElementsByClassName("col-worksheet");
+
+	for (var i = 0; i < element.length; i++) {
+		element[i].style.display = "block";
+	}
+}
 /*
 
 This animation won't work in any version of IE.

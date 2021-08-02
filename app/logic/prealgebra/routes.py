@@ -1,26 +1,22 @@
 """Route declaration."""
 #system imports
-from flask import Blueprint, render_template, request
+from flask import *
 #from .prealgebraforms import DecimalPlace
 from app import db
 from .decimal_place import Decimal_Places
+from datetime import timedelta
+
 prealgebra_bp = Blueprint('prealgebra',__name__, url_prefix='/prealgebra', template_folder='templates',static_folder='static')
 
-#nav List
-nav = [
-    {'name': 'Home', 'url': '/'},
-    {'name': 'Prealgebra', 'url': '/prealgebra'},
-    {'name': 'Algebra', 'url': '/algebra'},
-    {'name': 'Load', 'url': '/loadwkst'},
-    {'name': 'Contact', 'url': '/contact'}
-    #{'name': 'Signup', 'url': '/signup'}
-]
+@prealgebra_bp.before_request
+def makesession_permanent():
+    session.permanent = True
+    prealgebra_bp.permanent_session_lifetime = timedelta(minutes = 60)
 
 @prealgebra_bp.route('/')
 def prealgebra_main():
     return render_template(
         'prealgebra/prealgebra.html', 
-        nav=nav , 
         descripstion = 'prealgebra/01'
         )
 
@@ -30,7 +26,6 @@ def prealgebra_sec1():
         return render_template(
             'prealgebra/prealgebra.html', 
             seed = '1-1-1',
-            nav=nav , 
             descripstion = 'prealgebra/01'
         )
     else:
@@ -53,13 +48,38 @@ def prealgebra_sec1():
             descripstion = 'prealgebra/01'
         )
 
+@prealgebra_bp.route('/editing', methods=["GET", "POST", "PUT"])
+def prealgebra_edit():
+    if request.method == 'GET':
+        cur = db.connection.cursor()
+        cur.execute("SELECT title FROM mmtseed WHERE sname LIKE 'jaegeun'")
+        title = cur.fetchall()
+        
+        cur.execute("SELECT sname FROM mmtseed WHERE sname LIKE 'jaegeun'")
+        sname = cur.fetchall()
+        
+        cur.execute("SELECT tname FROM mmtseed WHERE sname LIKE 'jaegeun'")
+        tname = cur.fetchall()
 
-@prealgebra_bp.route('/01_decimal_place')
-def decimal_place():
+        cur.execute("SELECT seed FROM mmtseed WHERE sname LIKE 'jaegeun'")
+        seed = cur.fetchall()
 
-    return render_template('prealgebra/01_decimal_place.html')
-
-@prealgebra_bp.route('/02_decimal_place')
-def reading_writing():
-
-    return render_template('prealgebra/02_naming.html')
+        arr = [title, sname, tname, seed]
+        return render_template(
+            'prealgebra/editing.html', 
+            nav=nav , 
+            darr = arr,
+            descripstion = 'prealgebraEdit'
+        )
+    elif request.method == 'POST':
+        return render_template(
+            'prealgebra/editing.html', 
+            nav=nav , 
+            descripstion = 'prealgebraEdit'
+        )
+    else:
+        return render_template(
+            'prealgebra/editing.html',
+            nav = nav,
+            descripstion = 'prealgebraEdit'
+        )

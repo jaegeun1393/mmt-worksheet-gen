@@ -9,6 +9,7 @@
 
 {% block content %}
 
+<!--SAME NAME but having different function-->
 <div class="login"> 
     <h2 class="login-header">Sign Up</h2>
 
@@ -16,6 +17,13 @@
       <p><input type="text" placeholder="User name" name="name" required/></p>
       <p><input type="email" placeholder="Email" name="email" required/></p>
       <p><input type="password" placeholder="Password" name="password" required/></p>
+      <p>
+        <label for="role">Choose a role: </label>
+        <select id="roles" name="roles">
+          <option value="teacher">Teacher</option>
+          <option value="student">Student</option>
+        </select>
+      </p>
       <p><input type="submit" value="Sign Up" class="btn"/></p>
     </form>
 
