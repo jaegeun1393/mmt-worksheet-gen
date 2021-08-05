@@ -105,7 +105,7 @@
         </div>
       </div>
 
-      <li><a id="navcontact" href="/load">Load</a></li>
+     <!-- <li><a id="navcontact" href="/load">Load</a></li> -->
       <li><a id="navcontact" href="/contact">Contact</a></li>
       <!--
       <li style="float:right"><a class="active" href="../login" id="session">Login</a></li>
@@ -113,6 +113,10 @@
 
       {% if data %}
       <li style="float:right"><a class="active" href="../logout">Logout</a></li>
+      <li style="float:right">
+        <a class="profile" href="../user">
+          <i class="fa fa-users">
+          </i></a></li>
       {%else%}
       <li style="float:right"><a class="active" href="../login">Login</a></li>
       {%endif %}

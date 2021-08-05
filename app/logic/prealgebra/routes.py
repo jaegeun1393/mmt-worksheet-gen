@@ -15,16 +15,26 @@ def makesession_permanent():
 
 @prealgebra_bp.route('/')
 def prealgebra_main():
+    login = False
+    if 'response' in session:
+        login = True
+    
     return render_template(
         'prealgebra/prealgebra.html', 
+        data = login,
         descripstion = 'prealgebra/01'
         )
 
 @prealgebra_bp.route('/1-1-1', methods=["GET", "POST"])
 def prealgebra_sec1():
+    login = False
+    if 'response' in session:
+        login = True
+
     if request.method == 'GET':
         return render_template(
             'prealgebra/prealgebra.html', 
+            data = login,
             seed = '1-1-1',
             descripstion = 'prealgebra/01'
         )
@@ -44,7 +54,6 @@ def prealgebra_sec1():
         return render_template(
             'prealgebra/prealgebra.html', 
             seed = '1-1-1',
-            nav=nav , 
             descripstion = 'prealgebra/01'
         )
 
