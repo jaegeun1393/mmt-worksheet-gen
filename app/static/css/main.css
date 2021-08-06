@@ -35,6 +35,11 @@ li a:hover:not(.active) {
     color: black;
 }
 
+.profile {
+    background-color: #333;
+    color: white;
+}
+
 .nav-cont {
     display: none;
     position: absolute;
@@ -68,7 +73,6 @@ h6 {
     margin-bottom: 16px;
     font-size: 14px;
 }
-
 
 /*Drop down menu*/
 .dropbtn {

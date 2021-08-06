@@ -9,13 +9,31 @@ def main_user():
     login = False
     if 'response' in session:
         login = True
+        userinfo = session['response']
+        role = session['role']
+        role = role[slice(1, 6, 3)]
+        print("=", role, "=")
     
     if (login == True):
 
-        return render_template(
-            'user/userinfo.html',  
-            data = login,
-            descripstion = 'load worksheet'
-            )
+        if(role == " ('teacher',) "): 
+            print("1")
+            return render_template(
+                'user/Tuserinfo.html',  
+                data = login,
+                userinfo = userinfo,
+                role = role,
+                descripstion = 'load worksheet'
+                )
+        else:
+            print("2")
+            return render_template(
+                'user/Suserinfo.html',  
+                data = login, 
+                userinfo = userinfo,
+                role = role,
+                descripstion = 'load worksheet'
+                )
+
     else:
         return redirect(url_for('login.login_main'))

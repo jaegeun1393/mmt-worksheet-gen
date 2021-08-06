@@ -18,6 +18,12 @@ body {
   margin-bottom: 0;
 }
 
+.signup2 {
+  width: 183px;
+  vertical-align:top;
+  float:left;
+}
+
 .login-header {
   background: rgb(76, 77, 122);
   padding: 20px;

@@ -6,7 +6,7 @@ from app import db
 from datetime import timedelta
 import bcrypt
 import MySQLdb
-
+import uuid
 
 
 login_bp = Blueprint('login',__name__, url_prefix='/login', template_folder='templates',static_folder='static')
@@ -40,14 +40,21 @@ def login_main():
         email = request.form['email']
         password = request.form['password']
         cur = db.connection.cursor()
+        #Where collect all data
         cur.execute('SELECT * from accounts where email = %s AND password = %s', (email, password))
         data = cur.fetchone()
+
+        #where collect the role of the user
+        cur.execute('SELECT role from accounts where email = %s AND password = %s', (email, password))
+        role = cur.fetchone()
+
         cur.close()
 
         if data is None:
             return 'Failed'
         else:
             session['response'] = data
+            session['role'] = role
             
             return redirect(url_for('home.index'))
 
@@ -61,35 +68,23 @@ def signup():
             descripstion = 'Sign Up'
         )
     else:
+        uid = uuid.uuid1()
         name = request.form['name']
+        Fname = request.form['Fname']
+        Lname = request.form['Lname']
         email = request.form['email']
         pswd = request.form['password']
         role = request.form['roles']
 
-        cur = db.connection.cursor()
-        cur.execute("INSERT INTO users(name, email, pswd, role) VALUES(%s, %s, %s, %s)", (name, email, pswd, role))
-        db.connection.commit()
-        cur.close()
+        if(role == "teacher"):
+            cur = db.connection.cursor()
+            cur.execute("INSERT INTO Taccounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
+            db.connection.commit()
+            cur.close()
+        else:
+            cur = db.connection.cursor()
+            cur.execute("INSERT INTO Saccounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
+            db.connection.commit()
+            cur.close()
         
-        return render_template(
-            'login/login.html', 
-            nav=nav , 
-            descripstion = 'login'
-        )
-
-@login_bp.route('/lookup', methods=["GET"])
-def search():
-    if request.method == 'GET':
-        cur = db.connection.cursor()
-        cur.execute('SELECT * FROM users')
-        select = list(cur.fetchall())
-
-        print(select)
-
-        return 'success'
-
-#    return render_template(
-#        'login/signup.html',
-#        nav=nav,
-#        descripstion = 'Sign Up'
-#    )
+        return redirect(url_for('login.login_main'))
