@@ -1,9 +1,9 @@
 """Route declaration."""
 #system imports
 from flask import *
-#from .prealgebraforms import DecimalPlace
 from app import db
 from .decimal_place import Decimal_Places
+from .prealgebraforms import generator
 from datetime import timedelta
 
 prealgebra_bp = Blueprint('prealgebra',__name__, url_prefix='/prealgebra', template_folder='templates',static_folder='static')
@@ -32,13 +32,15 @@ def prealgebra_sec1():
         login = True
 
     if request.method == 'GET':
+        form = generator()
         return render_template(
             'prealgebra/prealgebra.html', 
             data = login,
+            form = form,
             seed = '1-1-1',
             descripstion = 'prealgebra/01'
         )
-    else:
+    else: #When the case is POST
         sname = request.form['studnetName']
         tname = "aiden O."
         seed = request.form['master']
