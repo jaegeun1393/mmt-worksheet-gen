@@ -29,62 +29,71 @@ def makesession_permanent():
 @login_bp.route('/', methods=["GET", "POST"])
 def login_main():
     #passing dict to contruct 
-    if request.method == 'GET': 
-        return render_template(
-            'login/login.html', 
-            nav=nav , 
-            descripstion = 'login'
-        )
+    login = False
+    if 'response' in session:
+        login = True
+
+    if (login == False):
+        if request.method == 'GET': 
+            return render_template(
+                'login/login.html', 
+                nav=nav , 
+                descripstion = 'login'
+            )
         
-    else:
-        email = request.form['email']
-        password = request.form['password']
-        cur = db.connection.cursor()
-        #Where collect all data
-        cur.execute('SELECT * from accounts where email = %s AND password = %s', (email, password))
-        data = cur.fetchone()
-
-        #where collect the role of the user
-        cur.execute('SELECT role from accounts where email = %s AND password = %s', (email, password))
-        role = cur.fetchone()
-
-        cur.close()
-
-        if data is None:
-            return 'Failed'
         else:
-            session['response'] = data
-            session['role'] = role
+            email = request.form['email']
+            password = request.form['password']
+            cur = db.connection.cursor()
             
-            return redirect(url_for('home.index'))
+            #Where collect all data
+            cur.execute('SELECT * from accounts where email = %s AND password = %s', (email, password))
+            data = cur.fetchone()
+
+            #where collect the role of the user
+            cur.execute('SELECT role from accounts where email = %s AND password = %s', (email, password))
+            role = cur.fetchone()
+
+            cur.close()
+
+            if data is None:
+                return 'Failed'
+            else:
+                session['response'] = data
+                session['role'] = role
+            
+                return redirect(url_for('home.index'))
+    else:
+        return redirect(url_for('home.index'))
 
 
 @login_bp.route('/mmtsignup', methods=["GET", "POST"])
 def signup():
-    if request.method == 'GET':
-        return render_template(
-            'login/signup.html',
-            nav=nav,
-            descripstion = 'Sign Up'
-        )
-    else:
-        uid = uuid.uuid1()
-        name = request.form['name']
-        Fname = request.form['Fname']
-        Lname = request.form['Lname']
-        email = request.form['email']
-        pswd = request.form['password']
-        role = request.form['roles']
+    login = False
+    if 'response' in session:
+        login = True
 
-        if(role == "teacher"):
-            cur = db.connection.cursor()
-            cur.execute("INSERT INTO Taccounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
-            db.connection.commit()
-            cur.close()
+    if (login == False):
+        if request.method == 'GET':
+            return render_template(
+                'login/signup.html',
+                nav=nav,
+                descripstion = 'Sign Up'
+            )
         else:
+            uid = uuid.uuid1()
+            name = request.form['name']
+            Fname = request.form['Fname']
+            Lname = request.form['Lname']
+            email = request.form['email']
+            pswd = request.form['password']
+            role = request.form['roles']
+
             cur = db.connection.cursor()
-            cur.execute("INSERT INTO Saccounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
+            cur.execute("INSERT INTO accounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
             db.connection.commit()
             cur.close()
         
-        return redirect(url_for('login.login_main'))
+            return redirect(url_for('login.login_main'))
+    else:
+        return redirect(url_for('home.index'))

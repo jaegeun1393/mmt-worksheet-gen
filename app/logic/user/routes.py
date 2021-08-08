@@ -1,8 +1,15 @@
 """Route declaration."""
 #system imports
 from flask import *
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField
 from app import db
+
 user_dp = Blueprint('user',__name__, url_prefix='/user', template_folder='templates',static_folder='static')
+
+class userinfo(FlaskForm):
+    username = StringField('username') 
+    role = StringField('role')
 
 @user_dp.route('/')
 def main_user():
@@ -10,30 +17,24 @@ def main_user():
     if 'response' in session:
         login = True
         userinfo = session['response']
-        role = session['role']
-        role = role[slice(1, 6, 3)]
-        print("=", role, "=")
-    
-    if (login == True):
+        role = str(session['role'])[2:9]
 
-        if(role == " ('teacher',) "): 
-            print("1")
+    #After login 
+    if (login == True): 
+        if(role == "teacher"):
             return render_template(
                 'user/Tuserinfo.html',  
-                data = login,
+                data = login, 
                 userinfo = userinfo,
-                role = role,
-                descripstion = 'load worksheet'
-                )
+                descripstion = 'load userinfo'
+            )
         else:
-            print("2")
             return render_template(
                 'user/Suserinfo.html',  
                 data = login, 
                 userinfo = userinfo,
-                role = role,
-                descripstion = 'load worksheet'
-                )
+                descripstion = 'load userinfo'
+            )
 
     else:
         return redirect(url_for('login.login_main'))
