@@ -1,6 +1,7 @@
 """Route declaration."""
 #system imports
 from flask import *
+from flask_weasyprint import HTML, render_pdf
 from app import db
 from .decimal_place import Decimal_Places
 from .prealgebraforms import generator
@@ -28,11 +29,12 @@ def prealgebra_main():
 @prealgebra_bp.route('/1-1-1', methods=["GET", "POST"])
 def prealgebra_sec1():
     login = False
+    form = generator(request.form)
+
     if 'response' in session:
         login = True
 
     if request.method == 'GET':
-        form = generator()
         return render_template(
             'prealgebra/prealgebra.html', 
             data = login,
@@ -40,57 +42,37 @@ def prealgebra_sec1():
             seed = '1-1-1',
             descripstion = 'prealgebra/01'
         )
-    else: #When the case is POST
-        sname = request.form['studnetName']
-        tname = "aiden O."
-        seed = request.form['master']
-        title = request.form['pdftitle']
-        desc = request.form['pdfdesc']
-        master = str(Decimal_Places(seed))
+    
+    elif request.method == 'POST': 
+    #    sname = request.form['studnetName']
+    #    tname = "aiden O."
+    #    seed = request.form['master']
+    #    title = request.form['pdftitle']
+    #    desc = request.form['pdfdesc']
+    #    master = str(Decimal_Places(seed))
     
     #custom function
-        cur = db.connection.cursor()
-        cur.execute("INSERT INTO mmtseed VALUES(%s, %s, %s, %s, %s)", (title, desc, sname, tname, master))
-        db.connection.commit()
-        cur.close()
+    #    cur = db.connection.cursor()
+    #    cur.execute("INSERT INTO mmtseed VALUES(%s, %s, %s, %s, %s)", (title, desc, sname, tname, master))
+    #    db.connection.commit()
+    #    cur.close()
+    
         return render_template(
             'prealgebra/prealgebra.html', 
             seed = '1-1-1',
             descripstion = 'prealgebra/01'
         )
 
-@prealgebra_bp.route('/editing', methods=["GET", "POST", "PUT"])
-def prealgebra_edit():
-    if request.method == 'GET':
-        cur = db.connection.cursor()
-        cur.execute("SELECT title FROM mmtseed WHERE sname LIKE 'jaegeun'")
-        title = cur.fetchall()
-        
-        cur.execute("SELECT sname FROM mmtseed WHERE sname LIKE 'jaegeun'")
-        sname = cur.fetchall()
-        
-        cur.execute("SELECT tname FROM mmtseed WHERE sname LIKE 'jaegeun'")
-        tname = cur.fetchall()
+@prealgebra_bp.route('/hello', defaults={'name': 'World'})
+def hello_html(name):
+    return render_template(
+        'prealgebra/example.html', 
+        name=name,
+        descripstion = 'this is the example'
+        )
 
-        cur.execute("SELECT seed FROM mmtseed WHERE sname LIKE 'jaegeun'")
-        seed = cur.fetchall()
-
-        arr = [title, sname, tname, seed]
-        return render_template(
-            'prealgebra/editing.html', 
-            nav=nav , 
-            darr = arr,
-            descripstion = 'prealgebraEdit'
-        )
-    elif request.method == 'POST':
-        return render_template(
-            'prealgebra/editing.html', 
-            nav=nav , 
-            descripstion = 'prealgebraEdit'
-        )
-    else:
-        return render_template(
-            'prealgebra/editing.html',
-            nav = nav,
-            descripstion = 'prealgebraEdit'
-        )
+@prealgebra_bp.route('/hello_<name>.pdf')
+def hello_pdf(name):
+    # Make a PDF straight from HTML in a string.
+    html = render_template('prealgebra/example.html', name=name)
+    return render_pdf(HTML(string=html))

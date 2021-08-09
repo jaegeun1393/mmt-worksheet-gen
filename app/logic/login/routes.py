@@ -47,11 +47,11 @@ def login_main():
             cur = db.connection.cursor()
             
             #Where collect all data
-            cur.execute('SELECT * from accounts where email = %s AND password = %s', (email, password))
+            cur.execute('SELECT * from aaccounts where email = %s AND password = %s', (email, password))
             data = cur.fetchone()
 
             #where collect the role of the user
-            cur.execute('SELECT role from accounts where email = %s AND password = %s', (email, password))
+            cur.execute('SELECT role from aaccounts where email = %s AND password = %s', (email, password))
             role = cur.fetchone()
 
             cur.close()
@@ -90,7 +90,7 @@ def signup():
             role = request.form['roles']
 
             cur = db.connection.cursor()
-            cur.execute("INSERT INTO accounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
+            cur.execute("INSERT INTO aaccounts(uid, username, Fname, Lname, email, password, role) VALUES(%s, %s, %s, %s, %s, %s, %s)", (uid, name, Fname, Lname, email, pswd, role))
             db.connection.commit()
             cur.close()
         
