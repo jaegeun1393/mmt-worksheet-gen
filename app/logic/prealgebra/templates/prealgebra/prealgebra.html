@@ -135,8 +135,8 @@
   <!--Generate button box-->
   <button type="submit" formmethod="post" class="upload"> <i class="fa fa-upload fa-2x"></i></button>
   <div class="btn_generate shadow">
-   <button type="submit" class="btn-create shadow">GENERATE WORKSHEET</button>
-    <!-- <button type="button" class="btn-create shadow" onclick="send_section111(seed)">GENERATE WORKSHEET</button> -->
+   <!-- <button type="submit" class="btn-create shadow">GENERATE WORKSHEET</button> -->
+    <button type="button" class="btn-create shadow" onclick="send_section111()">GENERATE WORKSHEET</button> 
   </div>
 </form>
   <!--End of the vertical option bar-->
@@ -145,25 +145,9 @@
     <p><span>$$\overline{4}6,440 $$</span></p>
   -->
 
-
-  <div class="wks-gen" style="width: 75%; float: right">
-    <div class = "col-worksheet">
-
-      <div class="wks-info">
-        <div> <p class= "wks-name">Name: <span id="txt-studnetName"></span></p> </div>
-        <div> <p class= "wks-date">Due Date: <span id="txt-dueDate"></span></p> </div>
-      </div>
-
-      <div class="wks-info2">
-        <div> <p class= "wks-title"><span id="txt-title"></span></p> </div>
-        <div> <p class= "wks-desc"><span id="txt-desc"></span></p> </div>
-      </div>
-
-      <div id="wks-problems">
-      </div>
-
-    </div>
-  </div>
+	<div class="mainContainer" style="width: 75%; float: right">
+		<div id="root"></div>
+	</div>
 
 <script>
   /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
@@ -201,4 +185,7 @@
   }
   </script>
 </body>
+<footer>
+  <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+</footer>
 {% endblock %}

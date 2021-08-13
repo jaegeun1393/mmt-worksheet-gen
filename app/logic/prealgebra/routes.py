@@ -1,7 +1,6 @@
 """Route declaration."""
 #system imports
 from flask import *
-from flask_weasyprint import HTML, render_pdf
 from app import db
 from .decimal_place import Decimal_Places
 from .prealgebraforms import generator
@@ -63,6 +62,7 @@ def prealgebra_sec1():
             descripstion = 'prealgebra/01'
         )
 
+'''
 @prealgebra_bp.route('/hello', defaults={'name': 'World'})
 def hello_html(name):
     return render_template(
@@ -76,3 +76,4 @@ def hello_pdf(name):
     # Make a PDF straight from HTML in a string.
     html = render_template('prealgebra/example.html', name=name)
     return render_pdf(HTML(string=html))
+    '''
