@@ -53,28 +53,12 @@ function seedDefine() {
 }
 
 //Generate the MASTERSEED
-function send_section111(preseed) { //when request wkst form
-	var masterSeed = "";
-	var createSeed = seedDefine();
+function send_section111() { //when request wkst form
 
-	if(createSeed == false) {
-		alert("Please check the option before create the worksheet.");
-	} else {
-		preseed = document.getElementById("seed").innerHTML;
-		for(var j = 0; j < 9; j += 3) {
-			for(var i = 0; i < createSeed[j]; i += 1) {
-				masterSeed = masterSeed.concat( section1(createSeed[j+1], createSeed[j+2]) );
-			}
-		}
+}
 
-		//remove previous p
-		document.getElementById("wks-problems").textContent = "";
-		showPDF(masterSeed);
-
-		//FINAL stage
-		masterSeed = preseed + "&&" + masterSeed;
-		document.getElementById("master").value = createSeed;
-	}
+function change() {
+	return "\\documentclass[12pt,oneside]{article}\n\\begin{document}\n \\setlength{\\belowdisplayskip}{5pt}\n \\setlength{\\belowdisplayshortskip}{0pt}\n \\setlength{\\abovedisplayskip}{-10pt}\n \\setlength{\\abovedisplayshortskip}{0pt}\n \\begin{flushright}\n Name: Jaegeun Oh\\\\ \n Insert Date\\\\ \n \\end{flushright}\n \\begin{center}\n MMTprep Worksheet\\\\\\\n \\[ 4^n + 5^n = 6^n \\]\\\\\n \\end{center}\n \\end{document}"
 }
 
 //Change the display setting to the block
