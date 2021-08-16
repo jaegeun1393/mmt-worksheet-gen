@@ -2,63 +2,13 @@
  * Section 1 functions
  ***********/
 
-//Check form condition
-function checkform(min, max) {
-	if(min < 99) { return false;}
-	else if(max > 900) { return false;}
-	else if(min > max) { return false;}
-	else if(min == 0) { return false;}
-	else if(max == 0) { return false;}
-	return true;
-}
-
-//generating createdSeed
-//[NUMprob][min][max] [NUMprob][min][max] [NUMprob][min][max] creation seed
-function seedDefine() {
-	const ids = ["numprob", "minnum", "maxnum"];
-	const lvl = ["E","M", "H"];
-	let combined = "";
-	var createSeed = new Array();
-	var j = 0;
-	var total = 0;
-	for(var i = 0; i < 3; i += 1) {
-		combined = lvl[i].concat(ids[0]);
-		var prob = parseInt(document.getElementById(combined).value);
-		createSeed[j] = prob;
-		total += prob;
-		j += 1;
-
-		combined = lvl[i].concat(ids[1]);
-		var min = parseInt(document.getElementById(combined).value);
-		createSeed[j] = min;
-		j += 1;
-
-		combined = lvl[i].concat(ids[2]);
-		var max = parseInt(document.getElementById(combined).value);
-		createSeed[j] = max;
-		j += 1;
-
-		if(prob > 0) {
-			if(!checkform(min, max)) {
-				return false;
-			}
-		}
-	}
-
-	if(total > 0) {
-		return createSeed;
-	} else {
-		return false;
-	}
-}
-
 //Generate the MASTERSEED
 function send_section111() { //when request wkst form
 
 }
 
-function change() {
-	return "\\documentclass[12pt,oneside]{article}\n\\begin{document}\n \\setlength{\\belowdisplayskip}{5pt}\n \\setlength{\\belowdisplayshortskip}{0pt}\n \\setlength{\\abovedisplayskip}{-10pt}\n \\setlength{\\abovedisplayshortskip}{0pt}\n \\begin{flushright}\n Name: Jaegeun Oh\\\\ \n Insert Date\\\\ \n \\end{flushright}\n \\begin{center}\n MMTprep Worksheet\\\\\\\n \\[ 4^n + 5^n = 6^n \\]\\\\\n \\end{center}\n \\end{document}"
+function change(seed) {
+	return seed
 }
 
 //Change the display setting to the block
@@ -83,15 +33,6 @@ function showPDF(seed) {
 	//Desc
 	document.getElementById("txt-title").innerHTML = document.getElementById("pdftitle").value;
 	document.getElementById("txt-desc").innerHTML = document.getElementById("pdfdesc").value;
-
-	var divs = document.createElement('div');
-	divs.innerHTML = seed;
-	const typeset = document.querySelector('#wks-problems')
-	typeset.appendChild(divs)
-	setTimeout(function () {
-		MathJax.typeset()
-		typeset.appendChild(divs)
-	  }, 10)
 }
 
 //Generate random problems
