@@ -3,7 +3,7 @@
 from flask import *
 from app import db
 from .decimal_place import Decimal_Places
-from .prealgebraforms import generator
+from .prealgebraforms import generator, example
 from datetime import timedelta
 
 prealgebra_bp = Blueprint('prealgebra',__name__, url_prefix='/prealgebra', template_folder='templates',static_folder='static')
@@ -29,20 +29,22 @@ def prealgebra_main():
 def prealgebra_sec1():
     login = False
     form = generator(request.form)
-
+    print("=", form.validate_on_submit())
     if 'response' in session:
         login = True
-
-    if request.method == 'GET':
-        return render_template(
-            'prealgebra/prealgebra.html', 
-            data = login,
-            form = form,
-            seed = '1-1-1',
-            descripstion = 'prealgebra/01'
-        )
     
-    elif request.method == 'POST': 
+    if request.method == 'POST' and form.validate(): 
+        #wkst = Wkst(form.Enump.data, form.Emin.data, form.Emax.data,
+        #            form.Mnump.data, form.Mmin.data, form.Mmax.data,
+        #            form.Hnump.data, form,Hmin.data, form.Hmax.data)
+
+        givechange = True
+        return redirect(
+            url_for('prealgebra.prealgebra_sec1')
+        )
+    elif request.method == 'POST' and not form.validate(): 
+        return 'ERROR'
+
     #    sname = request.form['studnetName']
     #    tname = "aiden O."
     #    seed = request.form['master']
@@ -56,24 +58,38 @@ def prealgebra_sec1():
     #    db.connection.commit()
     #    cur.close()
     
-        return render_template(
-            'prealgebra/prealgebra.html', 
-            seed = '1-1-1',
-            descripstion = 'prealgebra/01'
-        )
+    return render_template( #GET return
+        'prealgebra/prealgebra.html', 
+        data = login,
+        form = form,
+        seed = '1-1-1',
+        descripstion = 'prealgebra/01'
+    )
 
-'''
-@prealgebra_bp.route('/hello', defaults={'name': 'World'})
-def hello_html(name):
+@prealgebra_bp.route('/example', methods=["GET", "POST"])
+def hello_html():
+    form = example()
+    print("=", form.validate_on_submit())
+    if request.method == 'POST' and form.validate_on_submit(): 
+        wkst = Wkst(form.username.data)
+        return 'Thank you'
+
     return render_template(
         'prealgebra/example.html', 
-        name=name,
+        form = form,
         descripstion = 'this is the example'
         )
 
-@prealgebra_bp.route('/hello_<name>.pdf')
-def hello_pdf(name):
-    # Make a PDF straight from HTML in a string.
-    html = render_template('prealgebra/example.html', name=name)
-    return render_pdf(HTML(string=html))
-    '''
+#@prealgebra_bp.route('/hello', defaults={'name': 'World'})
+#def hello_html(name):
+#    return render_template(
+#        'prealgebra/example.html', 
+#        name=name,
+#        descripstion = 'this is the example'
+#        )
+
+#@prealgebra_bp.route('/hello_<name>.pdf')
+#def hello_pdf(name):
+#    # Make a PDF straight from HTML in a string.
+#    html = render_template('prealgebra/example.html', name=name)
+#    return render_pdf(HTML(string=html))

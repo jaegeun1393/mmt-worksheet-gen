@@ -5,88 +5,86 @@
 {% endblock %}
 
 {% block content %}
+
+{% if newpdf %}
+<body onload="change(seed);">
+{%else%}
 <body>
-  <form novalidate style="height: 0px" method = "POST">
-
+{%endif %}
   <!--MASTER LOCATION TO SAVE DATA-->
-  <div style="display: none;">
-    <p id="seed">{{ seed }}</p>
-    <input type="text" id="master" name="master">
-  </div>
-
   <div class="side-bar shadow" style="float: left">
     <div class="menu_intro" style="padding: 24px">
       <h3 class="w3-bar-item">Worksheet Options</h3>
       <h6 style="color: rgb(94, 94, 94)">Prealgebra worksheet generater</h6>
+
+      <!-- Where the form begin-->
+      <form novalidate style="height: 0px" method = "POST">
+        {{ form.csrf_token() }}
       <div class="dropdown">
         <button type="button" onclick="btnop1()" class="dropbtn">Problem Type Options</button>
         <div id="myDropdown" class="dropdown-content" style="margin-top: 0px">
 
             <div class="switch-box">
-
               <span>Easy</span>
-
               <div class="opts">
                 <div class="num_problem">
                   <label for="numprob" class="num-problem-font">Number of Problems*</label>
-                  <input type="number" id="Enump" name="Enump" min="0" max="100" value="1" required/>
+                  {{ form.Enump }}
                 </div>
 
                 <div class="txt-randnum">
                   <div style="float: left">
                     <label for="randnum" class="num-problem-font">min* </label>
-                    <input type="number" id="Eminnum" name="min" min="100" max="899" value="100" required/>
+                    {{ form.Emin }}                  
                   </div>
 
                   <div style="float: right">
                     <label for="randnum" class="num-problem-font">max* </label>
-                    <input type="number" id="Emaxnum" name="max" min="101" max="900" value="200" required/>
+                    {{ form.Emax }}                  
                   </div>
                 </div>
              </div>
             </div>
 
             <div class="switch-box">
-
               <span>Normal</span>
               <div class="opts">
                 <div class="num_problem">
                   <label for="numprob" class="num-problem-font">Number of Problems*</label>
-                  <input type="number" id="Mnumprob" name="numprob" min="1" max="100" value="0" required/>
+                  {{ form.Mnump }}
                 </div>
 
                 <div class="txt-randnum">
                   <div style="float: left">
                     <label for="randnum" class="num-problem-font">min* </label>
-                    <input type="number" id="Mminnum" name="min" min="100" max="899" value="300" required/>
+                    {{ form.Mmin }} 
                   </div>
 
                   <div style="float: right">
                     <label for="randnum" class="num-problem-font">max* </label>
-                    <input type="number" id="Mmaxnum" name="max" min="101" max="900" value="400" required/>
+                    {{ form.Mmax }}
                   </div>
                 </div>
              </div>
             </div>
 
             <div class="switch-box">
-
               <span>Decimal</span>
               <div class="opts">
                 <div class="num_problem">
                   <label for="numprob" class="num-problem-font">Number of Problems*</label>
-                  <input type="number" id="Hnumprob" name="numprob" min="1" max="100" value="0" required/>
+                  {{ form.Hnump }}
                 </div>
 
                 <div class="txt-randnum">
                   <div style="float: left">
                     <label for="randnum" class="num-problem-font">min* </label>
-                    <input type="number" id="Hminnum" name="min" min="100" max="899" value="300" required/>
+                    {{ form.Hmin }} 
                   </div>
 
                   <div style="float: right">
                     <label for="randnum" class="num-problem-font">max* </label>
-                    <input type="number" id="Hmaxnum" name="max" min="101" max="900" value="300" required/>
+                    {{ form.Hmax }} 
                   </div>
                 </div>
              </div>
@@ -131,12 +129,12 @@
           </div>
       </div>
 
-    </div>
+    </div> 
   <!--Generate button box-->
   <button type="submit" formmethod="post" class="upload"> <i class="fa fa-upload fa-2x"></i></button>
   <div class="btn_generate shadow">
-   <!-- <button type="submit" class="btn-create shadow">GENERATE WORKSHEET</button> -->
-    <button type="button" class="btn-create shadow" onclick="send_section111()">GENERATE WORKSHEET</button> 
+    <button type="submit" class="btn-create shadow">GENERATE WORKSHEET</button>
+    <!--<button type="button" class="btn-create shadow" onclick="send_section111()">GENERATE WORKSHEET</button> -->
   </div>
 </form>
   <!--End of the vertical option bar-->

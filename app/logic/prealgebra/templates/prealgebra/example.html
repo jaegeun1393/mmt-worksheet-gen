@@ -4,29 +4,14 @@
 <title>{{ title }}</title>
 {% endblock %}
 
-<link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css"
-  integrity="sha256-SSjvSe9BDSZMUczwnbB1ywCyIk2XaNly9nn6yRm6WJo="
-  crossorigin="anonymous">
-<style type="text/css">
-  body{background: white; }
-  .katex img {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: inherit;
-  }
-</style>
-
 {% block content %}
-
 <body>
-	<div class="mainContainer">
-		<div id="root"></div>
-	</div>
+  <form style="height: 0px" method = "POST" action = "">
+    {{ form.csrf_token() }}
 
+    <input type="text" id="username" name="username" value="">
+    <button type="submit" class="btn-create shadow">GENERATE WORKSHEET</button>
+  </form>
+ 
 </body>
-<footer>
-  <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
-</footer>
 {% endblock %}
