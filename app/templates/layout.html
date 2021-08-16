@@ -15,17 +15,14 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!--JS-->
-    <script src="{{ url_for('static', filename='js/pdfDesign.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/pre-alg.js') }}"></script>
     <script src="{{ url_for('static', filename='js/userinfo.js') }}"></script>
 
+    <!--JS PDF-->
     <script src="{{ url_for('static', filename='js/1-bundle.js') }}"></script>
 
-    <!-- Js PDF -->
-    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
-
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
 
     <!--MATH JAX-->
@@ -89,11 +86,7 @@
         </div>
       </div>
 
-     <!-- <li><a id="navcontact" href="/load">Load</a></li> -->
       <li><a id="navcontact" href="/contact">Contact</a></li>
-      <!--
-      <li style="float:right"><a class="active" href="../login" id="session">Login</a></li>
-      -->
 
       {% if data %}
       <li style="float:right"><a class="active" href="../logout">Logout</a></li>
@@ -106,15 +99,6 @@
       {%endif %}
 
     </ul>
-
-    <!--
-    <div ng-controller="myCtrl" ng-init="firstName='Jhon'">
-      <p>Input something in the input box:</p>
-      <p>The name is <span ng-bind="firstName"></span></p>
-      <p>Name :  <input type="text" ng-model="name"></p>
-      <h1>Hello {a name a}  {{ firstName }} {{5+5}} {5+5} </h1>
-    </div> -->
-
     {% block content %} <!-- Contents -->
     {% endblock %}
   </body>
