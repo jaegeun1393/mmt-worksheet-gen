@@ -50830,7 +50830,7 @@ object-assign
                     throw new TypeError("Cannot call a class as a function")
             }(this, t),
             (n = p(this, g(t).call(this, e))).state = {
-                tex: change("\\documentclass[12pt,oneside]{article}\\begin{document} \\setlength{\\belowdisplayskip}{5pt} \\setlength{\\belowdisplayshortskip}{0pt} \\setlength{\\abovedisplayskip}{-10pt} \\setlength{\\abovedisplayshortskip}{0pt} \\begin{flushright} Name: Jaegeun Oh\\\\ Insert Date\\\\ \\end{flushright} \\begin{center} MMTprep Worksheet\\\\ \\end{center} \\end{document}"),
+                tex: mainPDFdesign(),
                 json: '{"name": "world"}',
                 pdf: void 0
             },
@@ -50947,7 +50947,7 @@ object-assign
                 }, i.a.createElement("button", {
                     className: "button",
                     onClick: function() {
-                        send_section111()
+                    //    send_section111()
                         return e.submit()
                     }
                 }, "Submit"), n ? i.a.createElement("a", {

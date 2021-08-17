@@ -8,12 +8,85 @@ function send_section111() { //when request wkst form
 	
 	var all = document.querySelectorAll(".ace_editor");
 	var editor = ace.edit(all[0].env.editor);
-	editor.setValue("\\documentclass[12pt,oneside]{article}\\begin{document} \\setlength{\\belowdisplayskip}{5pt} \\setlength{\\belowdisplayshortskip}{0pt} \\setlength{\\abovedisplayskip}{-10pt} \\setlength{\\abovedisplayshortskip}{0pt} \\begin{flushright} Name: Jaegeun Oh\\\\ Insert Date\\\\ \\end{flushright} \\begin{center} Updated Worksheet\\\\ \\end{center} \\end{document}");
+	editor.session.setValue("\\documentclass[12pt,oneside]{article}\\begin{document} \\setlength{\\belowdisplayskip}{5pt} \\setlength{\\belowdisplayshortskip}{0pt} \\setlength{\\abovedisplayskip}{-10pt} \\setlength{\\abovedisplayshortskip}{0pt} \\begin{flushright} Name: Jaegeun Oh\\\\ Insert Date\\\\ \\end{flushright} \\begin{center} Updated Worksheet\\\\ \\end{center} \\end{document}");
 	
 }
 
-function change(seed) {
-	return seed
+function mainPDFdesign() {
+	const Tex = `\\documentclass[11pt,letterpaper]{article}
+		\\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+		\\usepackage{amsmath, amssymb, enumerate, graphicx, lastpage, multicol, multirow, qrcode, stackengine}
+
+		\\usepackage[T1]{fontenc}
+		\\usepackage{charter}
+
+		\\newcommand{\\class}{Section Title}
+		\\newcommand{\\term}{Worksheet Title}
+		\\newcommand{\\instructor}{Firstname Lastname}
+		\\newcommand{\\head}[2]{%
+			\\thispagestyle{empty}
+			\\vspace*{-0.5in}
+	
+			\\noindent\\begin{tabular*}{\\textwidth}{l @{\\extracolsep{\\fill}} r @{\\extracolsep{6pt}} l}
+			\\textbf{#1} & \\textbf{Name:} & \\makebox[8cm]{\\hrulefill} \\\\
+			\\textbf{#2} & & \\\\
+			\\textbf{\\class:\\; \\term} & & \\\\
+			\\textbf{Instructor: \\instructor}
+			\\end{tabular*} \\\\
+			\\rule[2ex]{\\textwidth}{2pt} %
+		}
+
+
+		\\newcommand{\\prob}{\\noindent\\textbf{Problem. }}
+		\\newcounter{problem}
+		\\newcommand{\\problem}{
+			\\stepcounter{problem}%
+			\\noindent \\textbf{Problem \\theproblem. }%
+		}
+		
+		\\newcommand{\\pointproblem}[1]{
+			\\stepcounter{problem}%
+			\\noindent \\textbf{Problem \\theproblem.} (#1 points)\\,%
+		}
+
+		\\newcommand{\\pspace}{\\par\\vspace{\\baselineskip}}
+		\\newcommand{\\ds}{\\displaystyle}
+
+		\\usepackage{fancyhdr}
+
+		\\fancypagestyle{pages}{
+			\\fancyhead[L]{}
+			\\fancyhead[C]{}
+			\\fancyhead[R]{}
+		\\renewcommand{\\headrulewidth}{0pt}
+			\\fancyfoot[L]{}
+			\\fancyfoot[C]{}
+			\\fancyfoot[R]{}
+		\\renewcommand{\\footrulewidth}{0.0pt}
+		}
+		\\headheight=0pt
+		\\footskip=14pt
+
+		\\pagestyle{pages}
+
+
+
+	\\begin{document}
+	\\head{MMTprep Worksheet}{Date: MM/DD/YYYY}
+
+	\\pointproblem{5} This is the example sentence. \\vspace{1.5cm}
+
+    
+	{\\raggedleft\\vfill\\itshape\\Longstack[l]{%
+		\\quad
+		\\qrcode{http://127.0.0.1:5000/}
+	}\\par
+}
+
+\\end{document}			
+	`
+	return Tex
 }
 
 //Change the display setting to the block
