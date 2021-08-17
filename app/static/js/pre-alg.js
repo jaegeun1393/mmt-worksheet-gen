@@ -3,8 +3,14 @@
  ***********/
 
 //Generate the MASTERSEED
+
 function send_section111() { //when request wkst form
 
+	
+	var elements = document.getElementsByClassName("editor");
+	var tex = elements.getElementById("tex");
+	console.log(tex);
+	
 }
 
 function change(seed) {

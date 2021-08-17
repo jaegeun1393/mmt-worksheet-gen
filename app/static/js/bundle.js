@@ -50830,7 +50830,7 @@ object-assign
                     throw new TypeError("Cannot call a class as a function")
             }(this, t),
             (n = p(this, g(t).call(this, e))).state = {
-                tex: change("\\documentclass[12pt,oneside]{article}\n\\begin{document}\n \\setlength{\\belowdisplayskip}{5pt}\n \\setlength{\\belowdisplayshortskip}{0pt}\n \\setlength{\\abovedisplayskip}{-10pt}\n \\setlength{\\abovedisplayshortskip}{0pt}\n \\begin{flushright}\n Name: Jaegeun Oh\\\\ \n Insert Date\\\\ \n \\end{flushright}\n \\begin{center}\n MMTprep Worksheet\\\\\\\n \\end{center}\n \\end{document}"),
+                tex: change("\\documentclass[12pt,oneside]{article}\\begin{document} \\setlength{\\belowdisplayskip}{5pt} \\setlength{\\belowdisplayshortskip}{0pt} \\setlength{\\abovedisplayskip}{-10pt} \\setlength{\\abovedisplayshortskip}{0pt} \\begin{flushright} Name: Jaegeun Oh\\\\ Insert Date\\\\ \\end{flushright} \\begin{center} MMTprep Worksheet\\\\ \\end{center} \\end{document}"),
                 json: '{"name": "world"}',
                 pdf: void 0
             },
