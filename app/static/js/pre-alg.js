@@ -5,11 +5,10 @@
 //Generate the MASTERSEED
 
 function send_section111() { //when request wkst form
-
 	
-	var elements = document.getElementsByClassName("editor");
-	var tex = elements.getElementById("tex");
-	console.log(tex);
+	var all = document.querySelectorAll(".ace_editor");
+	var editor = ace.edit(all[0].env.editor);
+	editor.setValue("\\documentclass[12pt,oneside]{article}\\begin{document} \\setlength{\\belowdisplayskip}{5pt} \\setlength{\\belowdisplayshortskip}{0pt} \\setlength{\\abovedisplayskip}{-10pt} \\setlength{\\abovedisplayshortskip}{0pt} \\begin{flushright} Name: Jaegeun Oh\\\\ Insert Date\\\\ \\end{flushright} \\begin{center} Updated Worksheet\\\\ \\end{center} \\end{document}");
 	
 }
 
